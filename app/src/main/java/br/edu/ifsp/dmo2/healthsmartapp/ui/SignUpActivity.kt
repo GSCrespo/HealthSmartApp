@@ -10,6 +10,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import br.edu.ifsp.dmo2.healthsmartapp.R
 import br.edu.ifsp.dmo2.healthsmartapp.databinding.ActivitySignUpBinding
+import com.google.android.ads.mediationtestsuite.activities.HomeActivity
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -32,9 +33,9 @@ class SignUpActivity : AppCompatActivity() {
             handleSignUp()
         }
 
-        binding.buttonHome.setOnClickListener {
-            launchHome()
-        }
+        //binding.buttonHome.setOnClickListener {
+            //launchHome()
+        //}
     }
 
 
