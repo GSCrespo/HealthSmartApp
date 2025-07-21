@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeActivity">
+
+
+    <TextView
+        android:id="@+id/summaryTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Resumo dos treinos"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <EditText
+        android:id="@+id/editTreinos"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Total de treinos"
+        android:enabled="false"
+        app:layout_constraintTop_toBottomOf="@id/summaryTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="32dp"/>
+
+    <EditText
+        android:id="@+id/editPassos"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Total de passos"
+        android:enabled="false"
+        app:layout_constraintTop_toBottomOf="@id/editTreinos"
+        app:layout_constraintStart_toStartOf="@id/editTreinos"
+        app:layout_constraintEnd_toEndOf="@id/editTreinos"/>
+
+    <EditText
+        android:id="@+id/editTempo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Tempo total (min)"
+        android:enabled="false"
+        app:layout_constraintTop_toBottomOf="@id/editPassos"
+        app:layout_constraintStart_toStartOf="@id/editPassos"
+        app:layout_constraintEnd_toEndOf="@id/editPassos"/>
+
+    <EditText
+        android:id="@+id/editCalorias"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Calorias estimadas"
+        android:enabled="false"
+        app:layout_constraintTop_toBottomOf="@id/editTempo"
+        app:layout_constraintStart_toStartOf="@id/editTempo"
+        app:layout_constraintEnd_toEndOf="@id/editTempo"/>
+
+    <Button
+        android:id="@+id/btnIrTreinar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Iniciar treino"
+        android:backgroundTint="@android:color/holo_green_light"
+        app:layout_constraintTop_toBottomOf="@id/editCalorias"
+        app:layout_constraintStart_toStartOf="@id/editCalorias"
+        app:layout_constraintEnd_toEndOf="@id/editCalorias"/>
+
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Sair"
+        android:backgroundTint="@android:color/holo_red_light"
+        app:layout_constraintTop_toBottomOf="@id/btnIrTreinar"
+        app:layout_constraintStart_toStartOf="@id/btnIrTreinar"
+        app:layout_constraintEnd_toEndOf="@id/btnIrTreinar"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
