@@ -6,8 +6,8 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 
-class giroscopioHelper (private val context: Context,
-private val onTrigger: () -> Unit
+class GiroscopioHelper (private val context: Context,
+                        private val onTrigger: () -> Unit
 ) : SensorEventListener {
 
     private var sensorManager: SensorManager =

@@ -1,31 +1,28 @@
 package br.edu.ifsp.dmo2.healthsmartapp.ui
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import br.edu.ifsp.dmo2.healthsmartapp.R
 import android.content.Context
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
-import android.os.Bundle
 import android.os.SystemClock
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import br.edu.ifsp.dmo2.healthsmartapp.databinding.ActivityExerciseBinding
+import br.edu.ifsp.dmo2.healthsmartapp.helper.ContadorDePassosHelper
+import br.edu.ifsp.dmo2.healthsmartapp.helper.GiroscopioHelper
+import br.edu.ifsp.dmo2.healthsmartapp.model.Workout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
-class ExerciseActivity : AppCompatActivity() {
+class ExerciseActivity : AppCompatActivity(), SensorEventListener {
 
     private lateinit var binding: ActivityExerciseBinding
 
     private lateinit var sensorManager: SensorManager
-    private var stepSensor: Sensor? = null
-    private var gyroSensor: Sensor? = null
+    private lateinit var passosHelper: ContadorDePassosHelper
+    private lateinit var giroHelper: GiroscopioHelper
 
     private var stepsAtStart: Float = -1f
     private var currentSteps: Int = 0
@@ -44,8 +41,21 @@ class ExerciseActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
-        stepSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
-        gyroSensor = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE)
+
+
+        passosHelper = ContadorDePassosHelper(this) { passos ->
+            currentSteps = passos
+            binding.stepsEditText.setText(passos.toString())
+        }
+
+        giroHelper = GiroscopioHelper(this) {
+            if (!isRunning) {
+                startTimer()
+                isRunning = true
+                Toast.makeText(this, "Treino iniciado via giroscópio!", Toast.LENGTH_SHORT).show()
+            }
+        }
+
 
         binding.pauseButton.setOnClickListener {
             if (timerRunning) pauseTimer() else resumeTimer()
@@ -59,17 +69,14 @@ class ExerciseActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        stepSensor?.also {
-            sensorManager.registerListener(this, it, SensorManager.SENSOR_DELAY_UI)
-        }
-        gyroSensor?.also {
-            sensorManager.registerListener(this, it, SensorManager.SENSOR_DELAY_UI)
-        }
+        passosHelper.start()
+        giroHelper.start()
     }
 
     override fun onPause() {
         super.onPause()
-        sensorManager.unregisterListener(this)
+        passosHelper.start()
+        giroHelper.start()
     }
 
     override fun onSensorChanged(event: SensorEvent?) {

@@ -38,16 +38,14 @@ class LoginActivity : AppCompatActivity() {
             launchSignUp()
         }
 
-        //binding.buttonHome.setOnClickListener {
-        //launchHome()
-        //}
+
     }
 
 
     private fun checkUser(){
 
         if(firebaseAuth.currentUser != null){
-
+            launchExercise()
         }
     }
 
@@ -61,7 +59,7 @@ class LoginActivity : AppCompatActivity() {
                 .signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        //launchHome()
+                        launchExercise()
                     } else {
                         Toast.makeText(this, "Erro na validação do login", Toast.LENGTH_LONG).show()
                     }
@@ -73,6 +71,11 @@ class LoginActivity : AppCompatActivity() {
 
     private fun launchSignUp() {
         startActivity(Intent(this, SignUpActivity::class.java))
+        finish()
+    }
+
+    private fun launchExercise(){
+        startActivity(Intent(this, ExerciseActivity::class.java))
         finish()
     }
 
