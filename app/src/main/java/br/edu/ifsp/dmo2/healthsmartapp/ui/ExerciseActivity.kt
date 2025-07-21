@@ -168,7 +168,6 @@ class ExerciseActivity : AppCompatActivity(){
             workout,
             onSuccess = {
                 Toast.makeText(this, "Treino salvo!", Toast.LENGTH_SHORT).show()
-                finish()
             },
             onFailure = {
                 Toast.makeText(this, "Erro ao salvar treino", Toast.LENGTH_SHORT).show()
