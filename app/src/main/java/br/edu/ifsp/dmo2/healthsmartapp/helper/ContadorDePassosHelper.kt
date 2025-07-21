@@ -1,12 +1,12 @@
-package br.edu.ifsp.dmo2.healthsmartapp.sensor
+package br.edu.ifsp.dmo2.healthsmartapp.helper
 import android.content.Context
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 
-class ContadorDePassosManager (private val context: Context,
-private val onStepUpdate: (steps: Int) -> Unit): SensorEventListener
+class ContadorDePassosHelper (private val context: Context,
+                              private val onStepUpdate: (steps: Int) -> Unit): SensorEventListener
 {
 
     private var sensorManager: SensorManager =
