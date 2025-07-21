@@ -3,12 +3,14 @@ package br.edu.ifsp.dmo2.healthsmartapp.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.content.Context
+import android.content.Intent
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.SystemClock
 import android.widget.Toast
+import br.edu.ifsp.dmo2.healthsmartapp.HomeActivity
 import br.edu.ifsp.dmo2.healthsmartapp.databinding.ActivityExerciseBinding
 import br.edu.ifsp.dmo2.healthsmartapp.helper.ContadorDePassosHelper
 import br.edu.ifsp.dmo2.healthsmartapp.helper.GiroscopioHelper
@@ -17,7 +19,7 @@ import br.edu.ifsp.dmo2.healthsmartapp.firebase.database
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
-class ExerciseActivity : AppCompatActivity(), SensorEventListener {
+class ExerciseActivity : AppCompatActivity(){
 
     private lateinit var binding: ActivityExerciseBinding
 
@@ -25,7 +27,6 @@ class ExerciseActivity : AppCompatActivity(), SensorEventListener {
     private lateinit var passosHelper: ContadorDePassosHelper
     private lateinit var giroHelper: GiroscopioHelper
 
-    private var stepsAtStart: Float = -1f
     private var currentSteps: Int = 0
     private var isRunning = false
 
@@ -33,7 +34,6 @@ class ExerciseActivity : AppCompatActivity(), SensorEventListener {
     private var elapsedTime = 0L
     private var timerRunning = false
 
-    private val db = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -91,6 +91,10 @@ class ExerciseActivity : AppCompatActivity(), SensorEventListener {
         }
 
 
+        binding.back.setOnClickListener {
+            launchHome()
+        }
+
 
     }
 
@@ -102,32 +106,9 @@ class ExerciseActivity : AppCompatActivity(), SensorEventListener {
 
     override fun onPause() {
         super.onPause()
-        passosHelper.start()
-        giroHelper.start()
+        passosHelper.stop()
+        giroHelper.stop()
     }
-
-    override fun onSensorChanged(event: SensorEvent?) {
-        event ?: return
-
-        when (event.sensor.type) {
-            Sensor.TYPE_STEP_COUNTER -> {
-                if (stepsAtStart == -1f) {
-                    stepsAtStart = event.values[0]
-                }
-                currentSteps = (event.values[0] - stepsAtStart).toInt()
-                binding.stepsEditText.setText(currentSteps.toString())
-            }
-            Sensor.TYPE_GYROSCOPE -> {
-                if (!isRunning && Math.abs(event.values[2]) > 3) {
-                    startTimer()
-                    isRunning = true
-                    Toast.makeText(this, "Treino iniciado!", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-    }
-
-    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
 
     private fun startTimer() {
         startTime = SystemClock.elapsedRealtime()
@@ -135,6 +116,7 @@ class ExerciseActivity : AppCompatActivity(), SensorEventListener {
         binding.timeTextView.post(timerRunnable)
         binding.pauseButton.text = "Pausar"
     }
+
 
     private fun pauseTimer() {
         elapsedTime += SystemClock.elapsedRealtime() - startTime
@@ -175,6 +157,7 @@ class ExerciseActivity : AppCompatActivity(), SensorEventListener {
 
 
         val workout = Workout(
+            userId = userId,
             steps = currentSteps,
             durationMinutes = timeInMin,
             estimatedCalories = calories,
@@ -195,5 +178,10 @@ class ExerciseActivity : AppCompatActivity(), SensorEventListener {
 
     private fun estimateCalories(steps: Int, time: Double): Double {
         return (steps * 0.04) + (time * 3)
+    }
+
+    private fun launchHome() {
+        startActivity(Intent(this, HomeActivity::class.java))
+        finish()
     }
 }

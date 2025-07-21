@@ -14,6 +14,13 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.25" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineH2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.75" />
+
     <TextView
         android:id="@+id/timeTextView"
         android:layout_width="wrap_content"
@@ -67,6 +74,18 @@
         android:backgroundTint="@android:color/holo_red_light"
         app:layout_constraintTop_toBottomOf="@id/startButton"
         app:layout_constraintStart_toEndOf="@id/pauseButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.5"/>
+
+
+    <Button
+        android:id="@+id/back"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Voltar"
+        android:backgroundTint="@android:color/holo_orange_light"
+        app:layout_constraintTop_toBottomOf="@id/guidelineH2"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintWidth_percent="0.5"/>
 
