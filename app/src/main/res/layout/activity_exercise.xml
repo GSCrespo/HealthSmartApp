@@ -21,7 +21,6 @@
         android:text="00:00"
         android:textSize="32sp"
         android:textStyle="bold"
-        app:layout_constraintTop_margin="32dp"
         app:layout_constraintBottom_toTopOf="@+id/guidelineH35"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -35,7 +34,6 @@
         android:enabled="false"
         android:gravity="center"
         app:layout_constraintTop_toBottomOf="@id/timeTextView"
-        app:layout_constraintTop_margin="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -46,7 +44,6 @@
         android:text="Iniciar"
         android:backgroundTint="@android:color/holo_green_light"
         app:layout_constraintTop_toBottomOf="@id/stepsEditText"
-        app:layout_constraintTop_margin="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintWidth_percent="1.0"/>
@@ -58,7 +55,6 @@
         android:text="Pausar"
         android:backgroundTint="@android:color/holo_blue_light"
         app:layout_constraintTop_toBottomOf="@id/startButton"
-        app:layout_constraintTop_margin="12dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/finishButton"
         app:layout_constraintWidth_percent="0.5"/>
@@ -70,7 +66,6 @@
         android:text="Finalizar"
         android:backgroundTint="@android:color/holo_red_light"
         app:layout_constraintTop_toBottomOf="@id/startButton"
-        app:layout_constraintTop_margin="12dp"
         app:layout_constraintStart_toEndOf="@id/pauseButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintWidth_percent="0.5"/>
