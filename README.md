@@ -19,7 +19,7 @@ O **HealthSmartApp** tem como objetivo ajudar usuários a se manterem ativos por
 ## Tecnologias e Recursos Utilizados
 
 - **Sensores Android**:  
-  - `Step Counter` para contar passos  
+  - `Step Counter` para contar passos (acelerômetro 
   - `Gyroscope` para iniciar treino com movimento
 
 - **Firebase**:  
