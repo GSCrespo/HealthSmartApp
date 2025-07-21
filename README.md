@@ -1,12 +1,12 @@
-# HealthSmartApp 🏃‍♂️📱
+# HealthSmartApp 
 
 Aplicativo acadêmico desenvolvido para monitoramento de atividades físicas e incentivo à prática de exercícios diários.
 
-## 🎯 Proposta
+## Proposta
 
 O **HealthSmartApp** tem como objetivo ajudar usuários a se manterem ativos por meio do controle de treinos com sensores do próprio dispositivo, exibindo métricas úteis como passos dados, tempo em atividade e estimativa de calorias queimadas.
 
-## 🧠 Funcionalidades
+## Funcionalidades
 
 - Autenticação via e-mail com Firebase Auth
 - Contador de passos utilizando o sensor `Step Counter`
@@ -16,18 +16,18 @@ O **HealthSmartApp** tem como objetivo ajudar usuários a se manterem ativos por
 - Tela Home com estatísticas: total de treinos, passos, tempo e calorias
 - Logout e controle de sessão
 
-## 🧰 Tecnologias e Recursos Utilizados
+## Tecnologias e Recursos Utilizados
 
-- 👣 **Sensores Android**:  
+- **Sensores Android**:  
   - `Step Counter` para contar passos  
   - `Gyroscope` para iniciar treino com movimento
 
-- ☁️ **Firebase**:  
+- **Firebase**:  
   - `Authentication`  
   - `Firestore` (salvamento de treinos)
 
-- 📱 **Kotlin 2.0.0**
-- 🎯 SDK mínimo: 29
+- **Kotlin 2.0.0**
+- SDK mínimo: 29
 
 ## 📌 Observações
 
