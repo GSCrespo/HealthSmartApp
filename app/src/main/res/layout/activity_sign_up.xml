@@ -32,6 +32,7 @@
         android:id="@+id/textlayout_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
         android:layout_margin="16dp"
         android:hint="Seu email aqui"
         app:layout_constraintStart_toStartOf="parent"

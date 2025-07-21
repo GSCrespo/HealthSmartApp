@@ -32,9 +32,9 @@ class SignUpActivity : AppCompatActivity() {
             handleSignUp()
         }
 
-        //binding.buttonHome.setOnClickListener {
-            //launchHome()
-        //}
+        binding.buttonHome.setOnClickListener {
+            launchLogin()
+        }
     }
 
 
@@ -59,7 +59,7 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
-    private fun launchHome(){
+    private fun launchLogin(){
         startActivity(Intent(this, LoginActivity::class.java))
         finish()
 
