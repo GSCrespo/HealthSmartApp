@@ -13,6 +13,7 @@ import br.edu.ifsp.dmo2.healthsmartapp.databinding.ActivityExerciseBinding
 import br.edu.ifsp.dmo2.healthsmartapp.helper.ContadorDePassosHelper
 import br.edu.ifsp.dmo2.healthsmartapp.helper.GiroscopioHelper
 import br.edu.ifsp.dmo2.healthsmartapp.model.Workout
+import br.edu.ifsp.dmo2.healthsmartapp.firebase.database
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -56,15 +57,41 @@ class ExerciseActivity : AppCompatActivity(), SensorEventListener {
             }
         }
 
+        setupListeners()
+    }
+
+
+    private fun setupListeners(){
+
+        binding.startButton.setOnClickListener {
+            if (!isRunning) {
+                startTimer()
+                isRunning = true
+                binding.startButton.isEnabled = false
+                Toast.makeText(this, "Treino iniciado manualmente!", Toast.LENGTH_SHORT).show()
+            }
+        }
+
 
         binding.pauseButton.setOnClickListener {
-            if (timerRunning) pauseTimer() else resumeTimer()
+            if (timerRunning) {
+                pauseTimer()
+                isRunning = false
+                binding.startButton.isEnabled = true
+                Toast.makeText(this, "Treino pausado", Toast.LENGTH_SHORT).show()
+            } else resumeTimer()
         }
 
         binding.finishButton.setOnClickListener {
             stopTimer()
             saveWorkout()
+            binding.startButton.isEnabled = false
+            binding.pauseButton.isEnabled = false
+            binding.finishButton.isEnabled = false
         }
+
+
+
     }
 
     override fun onResume() {
@@ -146,23 +173,24 @@ class ExerciseActivity : AppCompatActivity(), SensorEventListener {
         val timeInMin = (elapsedTime + (SystemClock.elapsedRealtime() - startTime)) / 60000.0
         val calories = estimateCalories(currentSteps, timeInMin)
 
+
         val workout = Workout(
-            userId = userId,
             steps = currentSteps,
             durationMinutes = timeInMin,
             estimatedCalories = calories,
             timestamp = System.currentTimeMillis()
         )
 
-        db.collection("workouts")
-            .add(workout)
-            .addOnSuccessListener {
+        database.saveWorkout(
+            workout,
+            onSuccess = {
                 Toast.makeText(this, "Treino salvo!", Toast.LENGTH_SHORT).show()
                 finish()
-            }
-            .addOnFailureListener {
+            },
+            onFailure = {
                 Toast.makeText(this, "Erro ao salvar treino", Toast.LENGTH_SHORT).show()
             }
+        )
     }
 
     private fun estimateCalories(steps: Int, time: Double): Double {

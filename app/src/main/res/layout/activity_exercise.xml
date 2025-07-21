@@ -7,6 +7,13 @@
     android:layout_height="match_parent"
     tools:context=".ui.ExerciseActivity">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineH35"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.25" />
+
     <TextView
         android:id="@+id/timeTextView"
         android:layout_width="wrap_content"
@@ -14,8 +21,10 @@
         android:text="00:00"
         android:textSize="32sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintTop_margin="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineH35"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <EditText
         android:id="@+id/stepsEditText"
@@ -24,16 +33,32 @@
         android:hint="Passos"
         android:inputType="number"
         android:enabled="false"
+        android:gravity="center"
         app:layout_constraintTop_toBottomOf="@id/timeTextView"
+        app:layout_constraintTop_margin="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+
+    <Button
+        android:id="@+id/startButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Iniciar"
+        android:backgroundTint="@android:color/holo_green_light"
+        app:layout_constraintTop_toBottomOf="@id/stepsEditText"
+        app:layout_constraintTop_margin="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="1.0"/>
 
     <Button
         android:id="@+id/pauseButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Pausar"
-        app:layout_constraintTop_toBottomOf="@id/stepsEditText"
+        android:backgroundTint="@android:color/holo_blue_light"
+        app:layout_constraintTop_toBottomOf="@id/startButton"
+        app:layout_constraintTop_margin="12dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/finishButton"
         app:layout_constraintWidth_percent="0.5"/>
@@ -43,7 +68,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Finalizar"
-        app:layout_constraintTop_toBottomOf="@id/stepsEditText"
+        android:backgroundTint="@android:color/holo_red_light"
+        app:layout_constraintTop_toBottomOf="@id/startButton"
+        app:layout_constraintTop_margin="12dp"
         app:layout_constraintStart_toEndOf="@id/pauseButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintWidth_percent="0.5"/>
