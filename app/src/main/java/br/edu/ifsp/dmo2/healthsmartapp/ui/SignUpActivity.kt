@@ -48,7 +48,8 @@ class SignUpActivity : AppCompatActivity() {
                 .createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        launchHome()
+                        //launchHome()
+                        Toast.makeText(this, "Cadastro efetuado com sucesso", Toast.LENGTH_SHORT).show()
                     } else {
                         Toast.makeText(this, "Erro na validação do cadastro", Toast.LENGTH_LONG).show()
                     }
