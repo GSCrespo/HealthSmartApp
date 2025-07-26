@@ -37,6 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Passos"
+        android:textSize="42sp"
         android:inputType="number"
         android:enabled="false"
         android:gravity="center"
